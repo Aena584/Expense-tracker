@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PaisaTrack - Expense Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <span class="fc" style="--x:8%;--d:0s">₨</span><span class="fc" style="--x:25%;--d:2s">₨</span><span class="fc" style="--x:45%;--d:5s">₨</span><span class="fc" style="--x:62%;--d:1s">₨</span><span class="fc" style="--x:80%;--d:3.5s">₨</span><span class="fc" style="--x:92%;--d:6s">₨</span>
+  <div class="brand"><span class="logo">₨</span><div><h1>PaisaTrack</h1><p>Know where every rupee goes</p></div></div>
+  <button id="themeBtn" class="ghost" aria-label="Change theme">Dark mode</button>
+</header>
+
+<main>
+  <section class="cards">
+    <div class="card"><span>Balance</span><strong id="balance">Rs 0</strong></div>
+    <div class="card inc"><span>Total income</span><strong id="income">Rs 0</strong></div>
+    <div class="card exp"><span>Total expense</span><strong id="expense">Rs 0</strong></div>
+  </section>
+
+  <section class="panel budget">
+    <div class="row">
+      <div><h2>Monthly budget</h2><p class="note" style="margin:0">Write how much you can spend this month (example: 6000) and click Set budget.</p></div>
+      <div class="inline">
+        <input type="number" id="budgetInput" min="0" placeholder="Set limit (Rs)">
+        <button id="budgetBtn">Set budget</button>
+      </div>
+    </div>
+    <div class="inline" style="margin-top:14px;align-items:center">
+      <label for="bMonth" style="margin:0">Budget month:</label>
+      <input type="month" id="bMonth" style="flex:0 1 190px">
+    </div>
+    <div class="bar"><div id="budgetFill"></div></div>
+    <p id="budgetText" class="note">No budget set yet.</p>
+  </section>
+
+  <div class="grid">
+    <section class="panel">
+      <h2 id="formTitle">Add transaction</h2>
+      <p id="formError" class="error" role="alert"></p>
+      <div id="txForm">
+        <div class="seg">
+          <label><input type="radio" name="type" value="expense" checked><span>Expense</span></label>
+          <label><input type="radio" name="type" value="income"><span>Income</span></label>
+        </div>
+        <label for="title">Title</label>
+        <input id="title" maxlength="40" placeholder="e.g. Lunch at canteen">
+        <label for="amount">Amount (Rs)</label>
+        <input id="amount" type="number" min="1" placeholder="e.g. 350">
+        <label for="category">Category</label>
+        <select id="category"></select>
+        <label for="date">Date</label>
+        <input id="date" type="date">
+        <div class="inline">
+          <button id="saveBtn">Add transaction</button>
+          <button id="cancelBtn" class="ghost" hidden>Cancel</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Spending by category</h2>
+      <div class="chartWrap">
+        <canvas id="chart" width="260" height="260"></canvas>
+        <ul id="legend"></ul>
+      </div>
+      <p id="chartEmpty" class="note">Add an expense to see the chart.</p>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h2>Income sources</h2>
+    <p class="note" style="margin:0 0 10px">Shows where your income comes from and how much.</p>
+    <ul id="incList" class="srcList"></ul>
+    <p id="incEmpty" class="note">Add an income to see where your money comes from.</p>
+  </section>
+
+  <section class="panel">
+    <div class="row">
+      <h2>Transactions</h2>
+      <div class="inline">
+        <button id="csvBtn" class="ghost">Download CSV</button>
+        <button id="clearBtn" class="danger">Delete ALL data</button>
+      </div>
+    </div>
+    <div class="filters">
+      <input id="search" placeholder="Search by title">
+      <select id="fType"><option value="all">All types</option><option value="income">Income</option><option value="expense">Expense</option></select>
+      <select id="fCat"></select>
+      <input id="fMonth" type="month">
+    </div>
+    <p class="note" style="margin:0 0 6px">Use Edit or Delete on each row to change one transaction.</p>
+    <ul id="list"></ul>
+    <p id="listEmpty" class="note">No transactions found.</p>
+  </section>
+</main>
+
+<div id="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
