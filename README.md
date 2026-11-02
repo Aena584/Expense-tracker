@@ -33,4 +33,4 @@ No installation or internet is needed.
 └── script.js
 
 ## Made By
-[Your Name] and [Your Friend's Name]
+[Aena Arshad] 
